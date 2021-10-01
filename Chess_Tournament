@@ -1,0 +1,110 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <queue>
+#include <deque>
+#include <bitset>
+#include <iterator>
+#include <list>
+#include <stack>
+#include <map>
+#include <set>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <limits>
+#include <time.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <unordered_set>
+#include <unordered_map>
+#define ll long long int
+#define ld long double
+#define inf 3e18 + 1
+#define all(v) (v).begin(), (v).end()
+#define N 5005
+#define F first
+#define S second
+using namespace std;
+ll mod = 1e9 + 7;
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(0);
+  #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+  //freopen("error.txt","w",stderr);
+  #endif
+  ll test = 1; 
+  cin>>test;
+  while (test--){
+    ll n;
+    cin>>n;
+    string s;
+    cin>>s;
+    ll cnt=0;
+    vector<ll>idx;
+    for(int i=0;i<n;i++) {
+      if(s[i]=='2') { 
+        cnt++;
+        idx.push_back(i);
+      }
+    }
+    if(cnt>0 and cnt<=2) { 
+      cout<<"NO"<<endl;
+      continue;
+    }
+    cout<<"YES"<<endl;
+    vector<vector<char>>ans(n,vector<char>(n,'.'));
+    // cout<<idx.size();
+    for(int i=0;i<idx.size();i++) { 
+      if(i==idx.size()-1) { 
+        ans[idx[i]][idx[0]]='+';
+      }
+      else { 
+        ans[idx[i]][idx[i+1]]='+';
+        
+      }
+    }
+    for(int i=0;i<n;i++) { 
+      for(int j=0;j<n;j++) { 
+        if(i==j) { 
+          ans[i][j]='X';
+        }
+        else if(s[i]=='1' and s[j]=='1') { 
+          ans[i][j]='=';
+        }
+        else if(s[i]=='1' and s[j]=='2') {
+          ans[i][j]='+';
+        }
+        else if(s[i]=='2' and s[j]=='1') {
+          ans[i][j]='-';
+        }
+        else if(s[i]=='2' and s[j]=='2') { 
+          if(ans[j][i]!='.') { 
+            if(ans[j][i]=='+') ans[i][j]='-';
+            else ans[i][j]='+';
+          }
+          else if(ans[i][j]=='.') {
+            ans[i][j]='-';
+          }
+        }
+      }
+    }
+    for(auto i:ans) {
+      for(auto j:i) {
+        cout<<j;
+      }
+      cout<<endl;
+    }
+    
+  }
+  return 0;
+}
