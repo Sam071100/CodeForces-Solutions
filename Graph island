@@ -1,0 +1,52 @@
+public class NumberOfIslands
+{
+	private static final int ROW = 5;
+	private static final int COLUMN = 5;
+	private static boolean visited[][] = new boolean[ROW][COLUMN];
+
+	public static void main(String args[]) throws Exception
+	{
+		int numberOfIslands = 0;
+		int graph [][] =  new int[][] {
+
+			{1, 1, 0, 0, 0},
+			{0, 1, 0, 0, 1},
+			{1, 0, 0, 1, 1},
+			{0, 0, 0, 0, 0},
+			{1, 0, 1, 0, 1}
+		};
+
+		for(int i = 0; i < ROW; i ++)
+		{
+			for(int j = 0; j < COLUMN; j++)
+			{
+				if(!visited[i][j] && graph[i][j] == 1)
+				{
+					++numberOfIslands;
+					DFS(i, j, graph);
+				}
+			}
+		}
+
+		System.out.println(numberOfIslands);
+	}
+
+	private static void DFS(int row, int column, int graph[][])
+	{
+		int rowBoundry[] = new int[] {-1, -1, -1,  0, 0,  1, 1, 1};
+		int columnBoundry[] = new int[] {-1,  0,  1, -1, 1, -1, 0, 1};
+
+		visited[row][column] = true;
+
+		for(int i = 0; i < 8; i ++)
+		{
+			if(isSafe(row + rowBoundry[i], column + columnBoundry[i], graph))
+			DFS(row + rowBoundry[i], column + columnBoundry[i], graph);
+		}
+	}
+
+	private static boolean isSafe(int row, int column, int graph[][])
+	{
+		return ((row < ROW && row  >= 0) && (column < COLUMN && column >= 0) && !visited[row][column] && graph[row][column] == 1);
+	}
+}
