@@ -1,3 +1,3 @@
 # CodeForces-Solutions
-* HacktoberFest 2021
+* HacktoberFest 2022
 * Solutions are accepted in C++ language.
