@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n, k;
+        cin >> n >> k;
+        vector<long long> v(k);
+        vector<long long> a;
+ 
+        for (int i = 0; i < k; i++)
+        {
+            cin >> v[i];
+        }
+ 
+        for (int i = k - 1; i > 0; i--)
+        {
+            int temp = v[i] - v[i - 1];
+            a.push_back(temp);
+        }
+ 
+        reverse(a.begin(), a.end());
+ 
+        // for(auto it: a)
+        // {
+        //     cout<<it<<" ";
+        // }
+ 
+        bool ans = is_sorted(a.begin(), a.end());
+        // cout<<endl<<ans<<endl;
+ 
+        if (k == 1)
+        {
+            cout << "YES\n";
+        }
+ 
+        else if (!ans)
+        {
+            cout << "NO\n";
+        }
+        else
+        {
+            int rem = n - k + 1;
+            int num;
+ 
+            if (v[0] > 0)
+            {
+                num = (v[0] - 1) / rem + 1;
+            }
+ 
+            else if(v[0] == 0)
+            {
+                num = 0;
+            }
+ 
+            else
+            {
+                num = (v[0]) / rem;
+            }
+ 
+            if (num <= a[0])
+            {
+                cout << "YES\n";
+            }
+            else
+            {
+                cout << "NO\n";
+            }
+        }
+    }
+    return 0;
+}
