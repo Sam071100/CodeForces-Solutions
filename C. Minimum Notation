@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        string s;
+        cin >> s;
+        int i, mn = INT_MAX, temp, n = s.length();
+ 
+        for (i = n - 1; i >= 0; i--)
+        {
+            temp = s[i] - '0';
+            if (temp > mn)
+            {
+                if (s[i] != '9')
+                {
+                    s[i] = s[i] + 1;
+                }
+            }
+ 
+            mn = min(mn, temp);
+        }
+ 
+        sort(s.begin(), s.end());
+ 
+        for (i = 0; i < n; i++)
+        {
+            cout << s[i];
+        }
+        cout << endl;
+    }
+    return 0;
+}
